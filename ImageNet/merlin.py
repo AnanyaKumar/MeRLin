@@ -8,11 +8,8 @@ import  numpy as np
 import  torchvision.datasets as datasets 
 import  torchvision.models as models 
 import  torchvision.transforms as transforms
-import  nvidia.dali.ops as ops
-import  nvidia.dali.types as types
-from    nvidia.dali.pipeline import Pipeline
-from    nvidia.dali.plugin.pytorch import DALIClassificationIterator, DALIGenericIterator
 import  os
+from utils import one_hot
 
 def merlin_linear(fss,ftt,target1,train_num, val_num, class_num):
     img_train2 = ftt[0:train_num]
@@ -30,7 +27,7 @@ def merlin_linear(fss,ftt,target1,train_num, val_num, class_num):
     target_label = np.zeros((train_num,class_num)).astype('float32')
     for i in range(train_num):
         target_label[i] = one_hot(class_num, target_label0[i])
-    target_label = target_label - np.ones_like(target_label) / class_num.0
+    target_label = target_label - np.ones_like(target_label) / float(class_num)
     target_train_label = torch.from_numpy(target_label.astype('float32')).cuda()
     
     
@@ -38,7 +35,7 @@ def merlin_linear(fss,ftt,target1,train_num, val_num, class_num):
     target_label11 = np.zeros((val_num,class_num)).astype('float32')
     for i in range(val_num):
         target_label11[i] = one_hot(class_num, target_label1[i])
-    target_label11 = target_label11 - np.ones_like(target_label11) / class_num.0
+    target_label11 = target_label11 - np.ones_like(target_label11) / float(class_num)
     target_val_label = torch.from_numpy(target_label11.astype('float32')).cuda()
     
     #ridge regression

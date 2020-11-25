@@ -8,10 +8,6 @@ import  numpy as np
 import  torchvision.datasets as datasets 
 import  torchvision.models as models 
 import  torchvision.transforms as transforms
-import  nvidia.dali.ops as ops
-import  nvidia.dali.types as types
-from    nvidia.dali.pipeline import Pipeline
-from    nvidia.dali.plugin.pytorch import DALIClassificationIterator, DALIGenericIterator
 import  os
 
 class BaseFeatureExtractor(nn.Module):
